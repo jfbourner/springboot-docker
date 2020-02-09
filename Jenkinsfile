@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building.. new 2'
+                mvn clean
             }
         }
         stage('Test') {
