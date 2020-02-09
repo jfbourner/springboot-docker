@@ -1,22 +1,11 @@
 pipeline {
-    agent any
-  
+    agent {
+        docker { image 'node:7-alpine' }
+    }
     stages {
-        stage('Build') {
-            steps {
-               sh '''
-                  mvn --version
-               '''
-            }
-        }
         stage('Test') {
             steps {
-                echo 'Testing..2'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                sh 'node --version'
             }
         }
     }
