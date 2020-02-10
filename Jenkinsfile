@@ -2,6 +2,7 @@ pipeline {
    agent {
        docker {
            image 'maven:3.3-jdk-8'
+           args '--entrypoint=\'\''
           // registryUrl 'http://192.168.1.110:8081/repository/docker-group/'
           // registryCredentialsId 'nexus3'
        }
