@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     docker.image('my-image:${env.BUILD_ID}').inside {
-                        sh 'echo "modified-inside-container"
+                        sh 'echo "modified-inside-container"'
                     }
                 }
             }
