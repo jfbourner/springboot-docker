@@ -24,7 +24,7 @@ pipeline {
                     customImage.inside {
                             sh 'pwd'
                     }
-                 ]
+                }
             }
         }
     }
