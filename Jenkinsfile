@@ -1,15 +1,19 @@
 pipeline {
-    agent none
+    agent {
+        docker { image 'maven:3.3-jdk-8'}
+    }
     stages {
-        stage('Back-end') {
-            agent {
-                docker { image 'maven:3-alpine' }
+        stage('Test') {
+                steps {
+                    sh 'mvn clean test'
+                }
             }
+        stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
-        stage('Front-end') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     def customImage = docker.build("my-image:${env.BUILD_ID}")
