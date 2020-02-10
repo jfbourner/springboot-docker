@@ -1,6 +1,5 @@
 pipeline {
     agent none
-    def customImage
     stages {
         stage('Back-end') {
             agent {
@@ -12,7 +11,7 @@ pipeline {
         }
         stage('Front-end') {
             steps {
-             customImage = docker.build("my-image:${env.BUILD_ID}")
+             docker.build("my-image:${env.BUILD_ID}")
             }
         }
     }
