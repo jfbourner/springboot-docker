@@ -25,11 +25,12 @@ pipeline {
             }
         }
         stage('Run Image and BDD') {
-            agent {
-                docker { image 'my-image:${env.BUILD_ID}' }
-            }
             steps {
-                sh 'pwd'
+                script {
+                    docker.image('my-image:${env.BUILD_ID}').inside {
+                        sh 'pwd'
+                    }
+                }
             }
         }
     }
