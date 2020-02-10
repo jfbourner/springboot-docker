@@ -11,7 +11,9 @@ pipeline {
         }
         stage('Front-end') {
             steps {
-             docker.build("my-image:${env.BUILD_ID}")
+                script {
+                    def customImage = docker.build("my-image:${env.BUILD_ID}")
+               }
             }
         }
     }
