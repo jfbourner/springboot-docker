@@ -17,13 +17,20 @@ pipeline {
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
-        stage('Front-end') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    def customImage = docker.build("my-image:${env.BUILD_ID}")
-                    customImage.inside {
-                            sh 'pwd'
-                    }
+                    docker.build("my-image:${env.BUILD_ID}")
+                }
+            }
+        }
+        stage('Run Image and BDD') {
+            agent {
+                docker { image 'my-image:${env.BUILD_ID}' }
+            }
+            steps {
+                script {
+                    sh 'echo hello'
                 }
             }
         }
