@@ -1,27 +1,27 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v $HOME/.m2:/root/.m2'
+    agent none
+    stage('Test') {
+        agent {
+            docker { image 'maven:3-alpine' }
+        }
+        steps {
+            sh 'mvn clean test'
         }
     }
-    stages {
-        stage('Test') {
-                steps {
-                    sh 'mvn clean test'
-                }
-            }
-        stage('Build') {
-            steps {
-                sh 'mvn clean package -Dmaven.test.skip=true'
-            }
+    stage('Build') {
+        agent {
+            docker { image 'maven:3-alpine' }
         }
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    def customImage = docker.build("my-image:${env.BUILD_ID}")
-               }
-            }
+        steps {
+            sh 'mvn clean package -Dmaven.test.skip=true'
+        }
+    }
+    stage('Front-end') {
+        steps {
+           def customImage = docker.build("my-image:${env.BUILD_ID}")
+           customImage.inside {
+                   sh 'pwd'
+           }
         }
     }
 }
