@@ -1,16 +1,20 @@
 pipeline {
-   agent {
-       docker {
-           image 'maven:3.3-jdk-8'
-           args '--entrypoint=\'\''
-          // registryUrl 'http://192.168.1.110:8081/repository/docker-group/'
-          // registryCredentialsId 'nexus3'
-       }
-   }
+    agent none
     stages {
-        stage('Test') {
+        stage('Back-end') {
+            agent {
+                docker { image 'maven:3-alpine' }
+            }
             steps {
                 sh 'mvn --version'
+            }
+        }
+        stage('Front-end') {
+            agent {
+                docker { image 'node:7-alpine' }
+            }
+            steps {
+                sh 'node --version'
             }
         }
     }
