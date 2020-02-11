@@ -26,11 +26,7 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-                script {
-                    docker.image('my-image:${env.BUILD_ID}').inside {
-                        echo 'Starting performance testing of configured APIs'
-                    }
-                }
+               sh 'docker run -p 8080:8080 -t "my-image:${env.BUILD_ID}"'
             }
         }
     }
