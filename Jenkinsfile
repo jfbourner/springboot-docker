@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+            build = ${env.BUILD_ID}
+    }
     stages {
         stage('Test') {
             agent {
@@ -26,7 +29,7 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run -p 8089:8089 -t "my-image:42"'
+               sh 'docker run -d -p 8089:8089 --name my-image:${build}'
             }
         }
     }
