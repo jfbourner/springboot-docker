@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run -d -t --name jack -p 8089:8080 my-image:${build}'
+               sh 'docker run -d -it  -p8089:8080 my-image:${build}'
                sh 'sleep 3'
                sh 'netstat -an|grep LISTEN'
                sh 'curl --request GET http://localhost:8089/get'
@@ -39,7 +39,7 @@ pipeline {
     post {
             always {
                 echo 'I will always say Hello again!'
-                sh 'docker stop jack'
+                //sh 'docker stop jack'
 
             }
         }
