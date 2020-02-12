@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run -d -t --name my-image -p 8089:8089 my-image:${build}'
+               sh 'docker run -d -t --name my-image -p 8089:8080 my-image:${build}'
                sh 'sleep 5'
                sh 'netstat -an|grep LISTEN'
                sh 'curl --request GET http://localhost:8089/get'
