@@ -29,9 +29,16 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run -d -p 8089:8089 -t my-image:${build}'
-               sh 'curl --request GET http://192.168.1.110:8089/get'
+               sh 'docker run -d -p 8089:8089 -t my-image:${build} --superman'
+               sh 'curl --request GET http://localhost:8089/get'
             }
         }
     }
+    post {
+            always {
+                echo 'I will always say Hello again!'
+                sh 'docker stop superman'
+
+            }
+        }
 }
