@@ -31,7 +31,7 @@ pipeline {
             steps {
                sh 'docker run --name my-image -d -ti -v /var/run/docker.sock:/var/run/docker.sock \
                                                      -v $(which docker):/usr/bin/docker -p 8089:8089 my-image:${build}'
-               sh 'sleep 5000'
+               sh 'sleep 5 SECONDS'
                sh 'curl --request GET http://localhost:8089/get'
             }
         }
