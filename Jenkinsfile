@@ -29,7 +29,8 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run --name my-image -d -ti -p 8089:8089 my-image:${build}'
+               sh 'docker run --name my-image -d -ti -v /var/run/docker.sock:/var/run/docker.sock \
+                                                     -v $(which docker):/usr/bin/docker -p 8089:8089 my-image:${build}'
                sh 'curl --request GET http://localhost:8089/get'
             }
         }
