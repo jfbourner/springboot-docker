@@ -12,6 +12,14 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
+        stage('Test') {
+            agent {
+                docker { image 'buildah/buildah' }
+            }
+            steps {
+                sh 'docker build -t jack-image .'
+            }
+        }
         stage('Build') {
             agent {
                 docker { image 'maven:3-alpine' }
