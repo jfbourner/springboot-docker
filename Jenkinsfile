@@ -17,6 +17,7 @@ pipeline {
                 docker { image 'buildah/buildah' }
             }
             steps {
+                sh 'buildah config --entrypoint "/usr/sbin/httpd -DFOREGROUND" working-container'
                 sh 'docker build -t jack-image .'
             }
         }
