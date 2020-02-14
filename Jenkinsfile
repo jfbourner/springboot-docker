@@ -23,14 +23,13 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("my-image:${env.BUILD_ID}")
+                    docker.build("my-image:${build}")
                 }
             }
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run -d -it  -p8089:8080 my-image:${build}'
-               sh 'sleep 3'
+               sh 'docker run -d -it --name my-image -p8089:8080 my-image:${build}'
                sh 'netstat -an|grep LISTEN'
                sh 'curl --request GET http://localhost:8089/get'
             }
@@ -38,8 +37,8 @@ pipeline {
     }
     post {
             always {
-                echo 'I will always say Hello again!'
-                //sh 'docker stop jack'
+                echo 'Stop container. Dont forget to prune!'
+                //sh 'docker stop my-image'
 
             }
         }
