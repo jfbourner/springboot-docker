@@ -14,7 +14,10 @@ pipeline {
         }
         stage('buildha test') {
             agent {
-                docker { image 'buildah/buildah' }
+                docker {
+                    image 'buildah/buildah'
+                    args '--privileged'
+                }
             }
             steps {
                 sh 'buildah config --entrypoint "/usr/sbin/httpd -DFOREGROUND" working-container'
