@@ -12,7 +12,7 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
-        stage('Test') {
+        stage('buildha test') {
             agent {
                 docker { image 'buildah/buildah' }
             }
