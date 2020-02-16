@@ -15,8 +15,7 @@ pipeline {
         stage('buildha test') {
             agent {
                 docker {
-                    image 'buildah/buildah'
-                    args '--privileged'
+                    image 'tomkukral/buildah'
                 }
             }
             steps {
