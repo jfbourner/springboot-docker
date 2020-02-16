@@ -20,8 +20,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'buildah config --entrypoint "/usr/sbin/httpd -DFOREGROUND" working-container'
-                sh 'docker build -t jack-image .'
+                sh 'buildah bud -f Dockerfile -t fedora-httpd .'
             }
         }
         stage('Build') {
@@ -41,7 +40,7 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run -d -it --name my-image -p8089:8080 my-image:${build}'
+               sh 'docker run -d -it -p8089:8080 --name my-image my-image:${build}'
                sh 'netstat -an|grep LISTEN'
                sh 'curl --request GET http://localhost:8089/get'
             }
