@@ -24,7 +24,7 @@ pipeline {
              agent {
                  docker {
                      image 'quay.io/buildah/stable'
-                     args '--isolation=chroot'
+                   //     args '--isolation=chroot'
                  }
              }
              steps {
