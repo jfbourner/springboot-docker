@@ -12,16 +12,6 @@ pipeline {
                 sh 'mvn clean test'
             }
         }
-        stage('buildha test') {
-            agent {
-                docker {
-                    image 'tomkukral/buildah'
-                }
-            }
-            steps {
-                sh 'buildah bud -f Dockerfile -t fedora-httpd .'
-            }
-        }
         stage('Build') {
             agent {
                 docker { image 'maven:3-alpine' }
@@ -29,6 +19,16 @@ pipeline {
             steps {
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
+        }
+        stage('buildha test') {
+             agent {
+                 docker {
+                     image 'quay.io/buildah/stable'
+                 }
+             }
+             steps {
+                 sh 'buildah bud -f Dockerfile -t fedora-httpd .'
+             }
         }
         stage('Build Docker Image') {
             steps {
