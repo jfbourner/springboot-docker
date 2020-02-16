@@ -28,7 +28,7 @@ pipeline {
                  }
              }
              steps {
-                 sh 'buildah bud --privileged -f Dockerfile -t fedora-httpd .'
+                 sh 'buildah images'
              }
         }
         stage('Build Docker Image') {
