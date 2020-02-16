@@ -17,6 +17,7 @@ pipeline {
                 docker { image 'maven:3-alpine' }
             }
             steps {
+                sh 'whoami'
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
@@ -24,6 +25,7 @@ pipeline {
              agent {
                  docker {
                      image 'quay.io/buildah/stable'
+                     args '-u build:build'
                    //     args '--isolation=chroot'
                  }
              }
