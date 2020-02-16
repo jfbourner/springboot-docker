@@ -17,7 +17,6 @@ pipeline {
                 docker { image 'maven:3-alpine' }
             }
             steps {
-                sh 'whoami'
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
