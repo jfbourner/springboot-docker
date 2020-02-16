@@ -28,7 +28,7 @@ pipeline {
                  }
              }
              steps {
-                 sh 'buildah images'
+                 sh 'whoami'
              }
         }
         stage('Build Docker Image') {
