@@ -24,10 +24,11 @@ pipeline {
              agent {
                  docker {
                      image 'quay.io/buildah/stable'
+                     args '--isolation=chroot'
                  }
              }
              steps {
-                 sh 'buildah bud -f Dockerfile -t fedora-httpd .'
+                 sh 'buildah bud --privileged -f Dockerfile -t fedora-httpd .'
              }
         }
         stage('Build Docker Image') {
