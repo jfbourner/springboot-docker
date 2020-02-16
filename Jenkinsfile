@@ -28,7 +28,7 @@ pipeline {
                  }
              }
              steps {
-                 sh 'chmod 644 /etc/passwd; chmod 644 /etc/group'
+                 sh 'cat /etc/passwd; cat /etc/group'
                  sh 'whoami'
              }
         }
