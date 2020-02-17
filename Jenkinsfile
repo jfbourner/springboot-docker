@@ -29,7 +29,7 @@ pipeline {
                  }
              }
              steps {
-              //   sh 'cat /etc/passwd; cat /etc/group'
+                sh 'pwd'
              //    sh 'whoami'
              }
         }
