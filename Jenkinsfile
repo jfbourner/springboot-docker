@@ -29,15 +29,17 @@ pipeline {
                  }
              }
              steps {
-                 sh 'cat /etc/passwd; cat /etc/group'
-                 sh 'whoami'
+              //   sh 'cat /etc/passwd; cat /etc/group'
+             //    sh 'whoami'
              }
         }
+
         stage('Build Docker Image') {
             steps {
-                script {
-                    docker.build("my-image:${build}")
-                }
+                sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
+              //  script {
+              //      docker.build("my-image:${build}")
+              //  }
             }
         }
         stage('Run Image and BDD') {
