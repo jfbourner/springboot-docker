@@ -32,6 +32,7 @@ pipeline {
         stage('Build Docker Image') {
             agent {
                 docker { image 'maven:3-alpine' }
+                args '--Privileged mode'
             }
             steps {
             sh 'cd target && ls -la '
