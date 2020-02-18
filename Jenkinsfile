@@ -20,23 +20,19 @@ pipeline {
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
-        stage('buildha test') {
-             agent {
-                 docker {
-                     image 'quay.io/buildah/stable'
-                     args '--privileged'
-                   //     args '--isolation=chroot'
+       /*  stage('buildha test') {
+            steps {
+                docker.withServer('tcp://swarm.example.com:2376', 'swarm-certs') {
+                    docker.image('maven:3-alpinex').withRun('-p 3306:3306') {
+                             *//* do things *//*
                  }
              }
-             steps {
-                sh 'pwd'
-             //    sh 'whoami'
-             }
-        }
+        } */
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
+                sh ' docker build . --tag my-image:${build}'
+               // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
               //  script {
               //      docker.build("my-image:${build}")
               //  }
@@ -44,8 +40,8 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run -d -it -p8089:8080 --name my-image my-image:${build}'
-               sh 'netstat -an|grep LISTEN'
+               sh 'docker run -d -it -p8089:9090 --name my-image my-image:${build}'
+
                sh 'curl --request GET http://localhost:8089/get'
             }
         }
