@@ -30,6 +30,9 @@ pipeline {
         } */
 
         stage('Build Docker Image') {
+            agent {
+                docker { image 'maven:3-alpine' }
+            }
             steps {
             sh 'cd target && ls -la '
                 sh 'docker build . --tag my-image:${build}'
