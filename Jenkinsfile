@@ -33,11 +33,10 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine'
-                    args '--privilege'
+                    args '-privilege=true'
                 }
             }
             steps {
-            sh 'cd target && ls -la '
                 sh 'docker build -v /var/run/docker.sock:/var/run/docker.sock . --tag my-image:${build}'
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
               //  script {
