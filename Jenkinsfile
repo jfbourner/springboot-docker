@@ -37,7 +37,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'docker build1 . --tag my-image:${build}'
+                sh 'docker build1 -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker . --tag my-image:${build}'
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
               //  script {
               //      docker.build("my-image:${build}")
