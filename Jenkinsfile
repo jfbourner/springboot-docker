@@ -31,7 +31,8 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh ' docker build . --tag my-image:${build}'
+            sh 'ls -la'
+                sh 'docker build . --tag my-image:${build}'
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
               //  script {
               //      docker.build("my-image:${build}")
@@ -41,7 +42,6 @@ pipeline {
         stage('Run Image and BDD') {
             steps {
                sh 'docker run -d -it -p8089:9090 --name my-image my-image:${build}'
-
                sh 'curl --request GET http://localhost:8089/get'
             }
         }
