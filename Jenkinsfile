@@ -31,8 +31,10 @@ pipeline {
 
         stage('Build Docker Image') {
             agent {
-                docker { image 'maven:3-alpine' }
-                args '--privilege'
+                docker {
+                    image 'maven:3-alpine'
+                    args '--privilege'
+                }
             }
             steps {
             sh 'cd target && ls -la '
