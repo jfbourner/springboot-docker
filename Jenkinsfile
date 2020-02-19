@@ -4,20 +4,22 @@ pipeline {
         build = "${env.BUILD_ID}"
     }
     stages {
-        stage('Test') {
+        stage('Unit Test') {
             agent {
                 docker {
-                    image 'maven:3.3-jdk-8'
+                    image 'maven:3-alpine'
+                    reuseNode true
                 }
             }
             steps {
                 sh 'mvn clean test'
             }
         }
-        stage('Build') {
+        stage('Package') {
             agent {
                 docker {
-                    image 'maven:3.3-jdk-8'
+                    image 'maven:3-alpine'
+                    reuseNode true
                 }
             }
             steps {
@@ -39,7 +41,7 @@ pipeline {
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
                 sh 'pwd'
                 sh 'cd target && ls -la '
-                sh 'cd .. ls -la'
+                sh 'cd .. ls -la '
                 script {
                     docker.build("my-image:${build}")
                 }
@@ -55,6 +57,7 @@ pipeline {
     post {
             always {
                 echo 'Stop container. Dont forget to prune!'
+                // cleanWs()
                 //sh 'docker stop my-image'
 
             }
