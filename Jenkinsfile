@@ -36,7 +36,9 @@ pipeline {
             steps {
                // sh 'docker build1 . --tag my-image:${build}'
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
-                sh 'ls -la'
+                sh 'pwd'
+                sh 'cd target && ls -la '
+                sh 'cd .. ls -la'
                 script {
                     docker.build("my-image:${build}")
                 }
