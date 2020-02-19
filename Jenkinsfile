@@ -50,6 +50,7 @@ pipeline {
         stage('Run Image and BDD') {
             steps {
                sh 'docker run -d -it -p8089:9090 --name my-image my-image:${build}'
+               sh 'sleep 5'
                sh 'curl --request GET http://localhost:8089/get'
             }
         }
@@ -58,7 +59,7 @@ pipeline {
             always {
                 echo 'Stop container. Dont forget to prune!'
                 // cleanWs()
-                //sh 'docker stop my-image'
+                sh 'docker stop my-image'
 
             }
         }
