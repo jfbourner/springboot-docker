@@ -30,17 +30,11 @@ pipeline {
         } */
 
         stage('Build Docker Image') {
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker'
-                }
-            }
             steps {
-                sh 'docker build1 -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker . --tag my-image:${build}'
+               // sh 'docker build1 . --tag my-image:${build}'
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
               //  script {
-              //      docker.build("my-image:${build}")
+                    docker.build("my-image:${build}")
               //  }
             }
         }
