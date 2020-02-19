@@ -8,7 +8,6 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.3-jdk-8'
-                    reuseNode true
                 }
             }
             steps {
@@ -19,9 +18,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3.3-jdk-8'
-                    reuseNode true
                 }
-
             }
             steps {
                 sh 'mvn clean package -Dmaven.test.skip=true'
