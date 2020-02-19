@@ -7,7 +7,7 @@ pipeline {
         stage('Test') {
             agent {
                 docker {
-                    image 'maven:3-alpine'
+                    image '3.3-jdk-8'
                     reuseNode true
                 }
             }
@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Build') {
             agent {
-                docker { image 'maven:3-alpine' }
+                docker { image '3.3-jdk-8' }
             }
             steps {
                 sh 'mvn clean package -Dmaven.test.skip=true'
@@ -54,7 +54,6 @@ pipeline {
     post {
             always {
                 echo 'Stop container. Dont forget to prune!'
-                cleanWs()
                 //sh 'docker stop my-image'
 
             }
