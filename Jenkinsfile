@@ -8,7 +8,6 @@ pipeline {
             agent {
                 docker {
                     image '3.3-jdk-8'
-                    reuseNode true
                 }
             }
             steps {
