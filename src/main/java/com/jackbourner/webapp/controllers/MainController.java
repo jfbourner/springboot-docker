@@ -11,6 +11,6 @@ public class MainController {
 
     @GetMapping("/get")
     public @ResponseBody ResponseEntity<String> post() {
-        return new ResponseEntity<String>("GET Response 2", HttpStatus.OK);
+        return new ResponseEntity<String>("GET Response 3", HttpStatus.OK);
     }
 }
