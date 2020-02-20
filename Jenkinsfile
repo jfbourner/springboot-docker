@@ -26,7 +26,7 @@ pipeline {
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
-       /*  stage('buildha test') {
+        /*  stage('buildha test') {
             steps {
                 docker.withServer('tcp://swarm.example.com:2376', 'swarm-certs') {
                     docker.image('maven:3-alpinex').withRun('-p 3306:3306') {
@@ -36,7 +36,7 @@ pipeline {
         } */
 
         stage('Build Docker Image') {
-            steps {
+        steps {
                // sh 'docker build1 . --tag my-image:${build}'
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
                 sh 'pwd'
@@ -49,9 +49,14 @@ pipeline {
         }
         stage('Run Image and BDD') {
             steps {
-               sh 'docker run -d -it -p8089:9090 --name my-image my-image:${build}'
-               sh 'sleep 5'
-               sh 'curl --request GET http://localhost:8089/get'
+                script {
+                    docker.image('my-image:${build}') { c ->
+                        /* Wait until my-image service is up */
+                        sh 'curl --request GET http://localhost:8089/get'
+                    }
+              // sh 'docker run -d -it -p8089:9090 --name my-image my-image:${build}'
+              // sh 'sleep 5'
+             //  sh 'curl --request GET http://localhost:8089/get'
             }
         }
     }
