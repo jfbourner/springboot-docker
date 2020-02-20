@@ -54,6 +54,7 @@ pipeline {
                         /* Wait until my-image service is up */
                         sh 'curl --request GET http://localhost:8089/get'
                     }
+                }
               // sh 'docker run -d -it -p8089:9090 --name my-image my-image:${build}'
               // sh 'sleep 5'
              //  sh 'curl --request GET http://localhost:8089/get'
