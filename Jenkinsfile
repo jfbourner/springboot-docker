@@ -50,7 +50,7 @@ pipeline {
         stage('Run Image and BDD') {
             steps {
                 script {
-                    docker.image('my-image:${build}').withRun() { c ->
+                    docker.image('my-image:${build}').withRun(-p 8089:9090 --name my-image) { c ->
                         /* Wait until my-image service is up */
                         sh 'curl --request GET http://localhost:8089/get'
                     }
