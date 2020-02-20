@@ -52,6 +52,7 @@ pipeline {
                 script {
                     docker.image('my-image:${build}').withRun('-p 8089:9090 --name my-image') { c ->
                         /* Wait until my-image service is up */
+                        sh 'sleep 5'
                         sh 'curl --request GET http://localhost:8089/get'
                     }
                 }
@@ -65,7 +66,7 @@ pipeline {
             always {
                 echo 'Stop container. Dont forget to prune!'
                 // cleanWs()
-                sh 'docker stop my-image'
+               // sh 'docker stop my-image'
 
             }
         }
