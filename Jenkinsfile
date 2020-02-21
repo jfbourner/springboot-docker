@@ -61,17 +61,15 @@ pipeline {
             steps {
                 script {
                     testImage.push('latest')
-                    }
                 }
             }
         }
     }
     post {
-            always {
-                echo 'Stop container. Dont forget to prune!'
-                // cleanWs()
-               // sh 'docker stop my-image'
-
-            }
+        always {
+            echo 'Stop container. Dont forget to prune!'
+            // cleanWs()
+           // sh 'docker stop my
         }
+    }
 }
