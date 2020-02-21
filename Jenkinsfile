@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         build = "${env.BUILD_ID}"
+        def testImage
     }
     stages {
         stage('Unit Test') {
@@ -13,6 +14,7 @@ pipeline {
             }
             steps {
                 sh 'mvn clean test'
+                sh 'sleep 50000'
             }
         }
         stage('Package') {
@@ -39,11 +41,8 @@ pipeline {
         steps {
                // sh 'docker build1 . --tag my-image:${build}'
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
-                sh 'pwd'
-                sh 'cd target && ls -la '
-                sh 'cd .. ls -la '
                 script {
-                    docker.build("my-image:${build}")
+                  testImage = docker.build("my-image:${build}")
                 }
             }
         }
@@ -56,9 +55,14 @@ pipeline {
                         sh 'curl --request GET http://localhost:8089/get'
                     }
                 }
-              // sh 'docker run -d -it -p8089:9090 --name my-image my-image:${build}'
-              // sh 'sleep 5'
-             //  sh 'curl --request GET http://localhost:8089/get'
+            }
+        }
+        stage('publish image') {
+            steps {
+                script {
+                    testImage.push('latest')
+                    }
+                }
             }
         }
     }
