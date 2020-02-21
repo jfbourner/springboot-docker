@@ -2,7 +2,6 @@ pipeline {
     agent any
     environment {
         build = "${env.BUILD_ID}"
-        def testImage
     }
     stages {
         stage('Unit Test') {
@@ -42,7 +41,7 @@ pipeline {
                // sh 'docker build1 . --tag my-image:${build}'
                // sh 'docker image build -v /var/run/docker.sock:/var/run/docker.sock .'
                 script {
-                  testImage = docker.build("my-image:${build}")
+                    def testImage = docker.build("my-image:${build}")
                 }
             }
         }
