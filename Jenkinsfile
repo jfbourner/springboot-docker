@@ -5,6 +5,12 @@ pipeline {
     }
     stages {
         stage('Unit Test') {
+            steps {
+                sh 'echo $HOME'
+                sh 'ls $HOME'
+                }
+            }
+        stage('Unit Test') {
             agent {
                 docker {
                     image 'maven:3-alpine'
