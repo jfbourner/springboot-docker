@@ -4,7 +4,7 @@ pipeline {
         build = "${env.BUILD_ID}"
     }
     stages {
-        stage('Unit Test') {
+        stage('jenkins') {
             steps {
                 sh 'echo $HOME'
                 sh 'ls $HOME'
