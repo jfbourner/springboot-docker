@@ -11,6 +11,7 @@ pipeline {
     stages {
         stage('jenkins') {
             steps {
+                sayHello 'JACK'
                 sh 'echo $HOME'
                 sh 'ls $HOME'
                 }
