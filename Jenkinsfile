@@ -11,7 +11,6 @@ pipeline {
     stages {
         stage('jenkins') {
             steps {
-                sayHello 'JACK'
                 sh 'echo $HOME'
                 sh 'ls $HOME'
                 }
@@ -24,6 +23,7 @@ pipeline {
                 }
             }
             steps {
+                sayHello 'JACK'
                 sh 'mvn clean test'
                 sh 'sleep 50000'
             }
