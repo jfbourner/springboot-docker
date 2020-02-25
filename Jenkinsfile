@@ -19,12 +19,13 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine'
-                   // args '-u 0 -v $HOME/.m2:/root/.m2'
+                    args '-u 0 -v $HOME/.m2:/root/.m2'
                 }
             }
             steps {
                 sayHello 'JACK'
                 sh 'find / -type d -name ".m2"'
+                sh 'sleep 5000'
                 sh 'mvn clean test'
             }
         }
@@ -32,7 +33,7 @@ pipeline {
             agent {
                 docker {
                     image 'maven:3-alpine'
-                  //  args '-v $HOME/.m2:/root/.m2'
+                    args '-v $HOME/.m2:/root/.m2'
                     reuseNode true
                 }
             }
