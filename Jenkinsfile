@@ -25,7 +25,6 @@ pipeline {
             steps {
                 sayHello 'JACK'
                 sh 'find / -type d -name ".m2"'
-                sh 'sleep 5000'
                 sh 'mvn clean test'
             }
         }
