@@ -25,8 +25,8 @@ pipeline {
             }
             steps {
                 sayHello 'JACK'
+                sh '$HOME'
                 sh 'mvn clean test'
-                sh 'sleep 50000'
             }
         }
         stage('Package') {
