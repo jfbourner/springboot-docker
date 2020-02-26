@@ -4,7 +4,7 @@ library identifier: 'custom-lib@master', retriever: modernSCM(
    credentialsId: 'github-pat'])
 
 pipeline {
-    agent none
+    agent any
     environment {
         build = "${env.BUILD_ID}"
     }
