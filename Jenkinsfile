@@ -4,7 +4,7 @@ library identifier: 'custom-lib@master', retriever: modernSCM(
    credentialsId: 'github-pat'])
 
 pipeline {
-    agent any
+    agent none
     environment {
         build = "${env.BUILD_ID}"
     }
@@ -19,7 +19,6 @@ pipeline {
                 docker {
                     image 'maven:3-alpine'
                     args '-v $HOME/.m2:/root/.m2'
-                    reuseNode true
                 }
             }
             steps {
