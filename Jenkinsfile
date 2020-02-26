@@ -12,7 +12,6 @@ pipeline {
         stage('jenkins') {
             steps {
                 sh 'echo $HOME'
-                sh 'ls $HOME'
                 }
             }
         stage('Unit Test') {
@@ -20,6 +19,7 @@ pipeline {
                 docker {
                     image 'maven:3-alpine'
                     args '-v $HOME/.m2:/root/.m2'
+                    reuseNode true
                 }
             }
             steps {
