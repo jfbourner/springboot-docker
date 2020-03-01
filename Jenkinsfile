@@ -45,7 +45,7 @@ pipeline {
               }
           }
           steps {
-              sh 'buildah bud -t imageName .'
+              sh 'buildah bud -t jackimage .'
           }
         }
 
