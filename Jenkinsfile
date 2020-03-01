@@ -45,7 +45,8 @@ pipeline {
               }
           }
           steps {
-              sh 'buildah bud -t jackimage .'
+              sh 'buildah bud -t jackimage . && buildah push --creds=jfbourner:Pieisgood1 jackimage jfbourner/jackimage:latest'
+
           }
         }
 
