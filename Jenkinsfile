@@ -45,7 +45,7 @@ pipeline {
               }
           }
           steps {
-              sh 'mvn clean package -Dmaven.test.skip=true'
+              sh 'buildah bud -t imageName .'
           }
         }
 
