@@ -31,21 +31,23 @@ pipeline {
                 docker {
                     image 'maven:3-alpine'
                     args '-v $HOME/.m2:/root/.m2'
-                    reuseNode true
                 }
             }
             steps {
                 sh 'mvn clean package -Dmaven.test.skip=true'
             }
         }
-        /*  stage('buildha test') {
-            steps {
-                docker.withServer('tcp://swarm.example.com:2376', 'swarm-certs') {
-                    docker.image('maven:3-alpinex').withRun('-p 3306:3306') {
-                             *//* do things *//*
-                 }
-             }
-        } */
+          stage('buildha test') {
+            agent {
+              docker {
+                  image 'quay.io/buildah/stable'
+                  args '--privileged -u 0'
+              }
+          }
+          steps {
+              sh 'mvn clean package -Dmaven.test.skip=true'
+          }
+        }
 
         stage('Build Docker Image') {
         steps {
