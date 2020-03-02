@@ -35,7 +35,7 @@ pipeline {
             steps {
                 sh 'mvn clean package -Dmaven.test.skip=true'
                 sayHello 'JACK'
-                sh 500
+                sleep 500
             }
         }
           stage('buildha test') {
