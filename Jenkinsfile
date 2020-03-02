@@ -22,8 +22,7 @@ pipeline {
                 }
             }
             steps {
-                sayHello 'JACK'
-                sh 'mvn clean test'
+            //    sh 'mvn clean test'
             }
         }
         stage('Package') {
@@ -35,6 +34,8 @@ pipeline {
             }
             steps {
                 sh 'mvn clean package -Dmaven.test.skip=true'
+                sayHello 'JACK'
+                sh 500
             }
         }
           stage('buildha test') {
