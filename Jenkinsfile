@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
                 sh 'mvn clean package -Dmaven.test.skip=true'
-                sh 'pwd && ls'
+                sh 'cd ./target/classes && ls -la'
                 sayHello 'JACK'
                 sleep 500
             }
