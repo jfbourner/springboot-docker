@@ -22,7 +22,7 @@ pipeline {
                 }
             }
             steps {
-            //    sh 'mvn clean test'
+               sh 'mvn clean test'
             }
         }
         stage('Package') {
